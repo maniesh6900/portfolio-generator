@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {
-  Mail, Phone, MapPin, Linkedin, Github, Globe, Twitter, Briefcase, GraduationCap, Code, Image as ImageIcon, User as UserIcon
+  Briefcase, Code, Github, Globe, GraduationCap, Image as ImageIcon, Linkedin, Mail, MapPin, Phone, Twitter, User as UserIcon,
+  X
 } from 'lucide-react';
 
 // Define Interfaces for Data Structures
@@ -171,61 +172,6 @@ const PortfolioForm: React.FC<PortfolioFormProps> = ({ onSubmit, selectedTemplat
     onSubmit({ ...formData, skills: parsedSkills });
   };
 
-  // Input field helper component props
-  interface InputFieldProps {
-    label: string;
-    name: string;
-    value: string;
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    type?: string;
-    placeholder?: string;
-  }
-
-  // Input field helper component
-  const InputField: React.FC<InputFieldProps> = ({ label, name, value, onChange, type = 'text', placeholder = '' }) => (
-    <div className="mb-4">
-      <label htmlFor={name} className="block text-sm font-medium text-gray-700 mb-1">
-        {label}
-      </label>
-      <input
-        type={type}
-        id={name}
-        name={name}
-        value={value}
-        onChange={onChange}
-        placeholder={placeholder}
-        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-      />
-    </div>
-  );
-
-  // Textarea field helper component props
-  interface TextareaFieldProps {
-    label: string;
-    name: string;
-    value: string;
-    onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-    placeholder?: string;
-  }
-
-  // Textarea field helper component
-  const TextareaField: React.FC<TextareaFieldProps> = ({ label, name, value, onChange, placeholder = '' }) => (
-    <div className="mb-4">
-      <label htmlFor={name} className="block text-sm font-medium text-gray-700 mb-1">
-        {label}
-      </label>
-      <textarea
-        id={name}
-        name={name}
-        value={value}
-        onChange={onChange}
-        placeholder={placeholder}
-        rows={3}
-        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-      ></textarea>
-    </div>
-  );
-
   return (
     <div className="w-full max-w-3xl bg-white shadow-xl rounded-xl p-6 md:p-8">
       <form onSubmit={handleSubmit}>
@@ -271,13 +217,22 @@ const PortfolioForm: React.FC<PortfolioFormProps> = ({ onSubmit, selectedTemplat
           <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
             <UserIcon className="mr-2" size={20} /> Personal Information
           </h2>
-          <InputField label="Full Name" name="name" value={formData.name} onChange={handleChange} placeholder="John Doe" />
-          <InputField label="Professional Title" name="title" value={formData.title} onChange={handleChange} placeholder="Software Engineer" />
-          <InputField label="Email" name="email" value={formData.email} onChange={handleChange} type="email" placeholder="john.doe@example.com" />
-          <InputField label="Phone" name="phone" value={formData.phone} onChange={handleChange} type="tel" placeholder="+1 (123) 456-7890" />
-          <InputField label="Location" name="location" value={formData.location} onChange={handleChange} placeholder="San Francisco, CA" />
-          <TextareaField label="Short Bio" name="bio" value={formData.bio} onChange={handleChange} placeholder="A passionate developer with expertise in..." />
-          <InputField label="Profile Picture URL" name="profilePicture" value={formData.profilePicture} onChange={handleChange} placeholder="https://example.com/your-photo.jpg" />
+          <div className='flex flex-col gap-4'>
+            <label htmlFor="">Name</label>
+            <input className='custom-input' name="name" value={formData.name} onChange={handleChange} placeholder="maniesh" />
+            <label htmlFor="">Profession</label>
+            <input className='custom-input' name="title" value={formData.title} onChange={handleChange} placeholder="Software Engineer" />
+            <label htmlFor="">Email</label>
+            <input className='custom-input' name="email" value={formData.email} onChange={handleChange} type="email" placeholder="john.doe@example.com" />
+            <label htmlFor="">Phone</label>
+            <input className='custom-input' name="phone" value={formData.phone} onChange={handleChange} type="tel" placeholder="+1 (123) 456-7890" />
+            <label htmlFor="">Location</label>
+            <input className='custom-input' name="location" value={formData.location} onChange={handleChange} placeholder="San Francisco, CA" />
+            <label htmlFor="">Bio</label>
+            <textarea className='custom-input' name="bio" value={formData.bio} onChange={handleChange} placeholder="A passionate developer with expertise in..." />
+            <label htmlFor="">Profile Picture</label>
+            <input className='custom-input' name="profilePicture" value={formData.profilePicture} onChange={handleChange} placeholder="https://example.com/your-photo.jpg" />
+          </div>custom-input
         </div>
 
         {/* Social Links */}
@@ -285,10 +240,14 @@ const PortfolioForm: React.FC<PortfolioFormProps> = ({ onSubmit, selectedTemplat
           <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
             <Globe className="mr-2" size={20} /> Social Links
           </h2>
-          <InputField label="LinkedIn Profile URL" name="linkedin" value={formData.linkedin} onChange={handleChange} placeholder="https://linkedin.com/in/yourprofile" />
-          <InputField label="GitHub Profile URL" name="github" value={formData.github} onChange={handleChange} placeholder="https://github.com/yourusername" />
-          <InputField label="Personal Website URL" name="website" value={formData.website} onChange={handleChange} placeholder="https://yourwebsite.com" />
-          <InputField label="Twitter Profile URL" name="twitter" value={formData.twitter} onChange={handleChange} placeholder="https://twitter.com/yourhandle" />
+          <Linkedin style={{width: "20px"}} />
+          <input className='custom-input' name="linkedin" value={formData.linkedin} onChange={handleChange} placeholder="https://linkedin.com/in/yourprofile" />
+          <Github style={{width: "20px"}} />
+          <input  className='custom-input' name="github" value={formData.github} onChange={handleChange} placeholder="https://github.com/yourusername" />
+          <Globe style={{width: "20px"}} />
+          <input className='custom-input' name="website" value={formData.website} onChange={handleChange} placeholder="https://yourwebsite.com" />
+          <X style={{width: "20px"}} />
+          <input className='custom-input' name="twitter" value={formData.twitter} onChange={handleChange} placeholder="https://twitter.com/yourhandle" />
         </div>
 
         {/* Skills */}
@@ -296,7 +255,10 @@ const PortfolioForm: React.FC<PortfolioFormProps> = ({ onSubmit, selectedTemplat
           <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
             <Code className="mr-2" size={20} /> Skills
           </h2>
-          <TextareaField label="Skills (comma-separated)" name="skills" value={formData.skills} onChange={handleChange} placeholder="React, JavaScript, Node.js, Python, SQL" />
+          <div className='flex flex-col gap-4'>
+            <textarea className='custom-input' name="skills" value={formData.skills} onChange={handleChange} placeholder="React, JavaScript, Node.js, Python, SQL" />
+          </div>
+         
         </div>
 
         {/* Experience */}
@@ -314,29 +276,28 @@ const PortfolioForm: React.FC<PortfolioFormProps> = ({ onSubmit, selectedTemplat
               >
                 &times;
               </button>
-              <InputField
-                label="Job Title"
+              <input
+              
                 name={`exp-title-${index}`}
                 value={exp.title || ''}
                 onChange={(e) => handleArrayChange(index, 'experience', 'title', e.target.value)}
                 placeholder="Software Engineer"
               />
-              <InputField
-                label="Company"
+              <input
+               
                 name={`exp-company-${index}`}
                 value={exp.company || ''}
                 onChange={(e) => handleArrayChange(index, 'experience', 'company', e.target.value)}
                 placeholder="Tech Corp"
               />
-              <InputField
-                label="Dates (e.g., Jan 2020 - Dec 2022)"
+              <input
+                
                 name={`exp-dates-${index}`}
                 value={exp.dates || ''}
                 onChange={(e) => handleArrayChange(index, 'experience', 'dates', e.target.value)}
                 placeholder="Jan 2020 - Dec 2022"
               />
-              <TextareaField
-                label="Description"
+              <textarea
                 name={`exp-description-${index}`}
                 value={exp.description || ''}
                 onChange={(e) => handleArrayChange(index, 'experience', 'description', e.target.value)}
@@ -368,29 +329,29 @@ const PortfolioForm: React.FC<PortfolioFormProps> = ({ onSubmit, selectedTemplat
               >
                 &times;
               </button>
-              <InputField
-                label="Degree"
+              <input
+                
                 name={`edu-degree-${index}`}
                 value={edu.degree || ''}
                 onChange={(e) => handleArrayChange(index, 'education', 'degree', e.target.value)}
                 placeholder="M.Sc. Computer Science"
               />
-              <InputField
-                label="Institution"
+              <input
+                
                 name={`edu-institution-${index}`}
                 value={edu.institution || ''}
                 onChange={(e) => handleArrayChange(index, 'education', 'institution', e.target.value)}
                 placeholder="University of Example"
               />
-              <InputField
-                label="Dates (e.g., Sep 2018 - May 2020)"
+              <input
+                
                 name={`edu-dates-${index}`}
                 value={edu.dates || ''}
                 onChange={(e) => handleArrayChange(index, 'education', 'dates', e.target.value)}
                 placeholder="Sep 2018 - May 2020"
               />
-              <TextareaField
-                label="Description (Optional)"
+              <textarea
+                
                 name={`edu-description-${index}`}
                 value={edu.description || ''}
                 onChange={(e) => handleArrayChange(index, 'education', 'description', e.target.value)}
@@ -422,36 +383,34 @@ const PortfolioForm: React.FC<PortfolioFormProps> = ({ onSubmit, selectedTemplat
               >
                 &times;
               </button>
-              <InputField
-                label="Project Name"
+              <input
                 name={`proj-name-${index}`}
                 value={project.name || ''}
                 onChange={(e) => handleArrayChange(index, 'projects', 'name', e.target.value)}
                 placeholder="E-commerce Platform"
               />
-              <TextareaField
-                label="Description"
+              <textarea
                 name={`proj-description-${index}`}
                 value={project.description || ''}
                 onChange={(e) => handleArrayChange(index, 'projects', 'description', e.target.value)}
                 placeholder="Built a full-stack e-commerce platform..."
               />
-              <InputField
-                label="Technologies Used (comma-separated)"
+              <input
+                
                 name={`proj-tech-${index}`}
                 value={project.technologies || ''}
                 onChange={(e) => handleArrayChange(index, 'projects', 'technologies', e.target.value)}
                 placeholder="React, Node.js, MongoDB"
               />
-              <InputField
-                label="Project URL (Live Demo)"
+              <input
+               
                 name={`proj-url-${index}`}
                 value={project.projectUrl || ''}
                 onChange={(e) => handleArrayChange(index, 'projects', 'projectUrl', e.target.value)}
                 placeholder="https://live-demo.com/project"
               />
-              <InputField
-                label="GitHub Repository URL"
+              <input
+                
                 name={`proj-github-${index}`}
                 value={project.githubUrl || ''}
                 onChange={(e) => handleArrayChange(index, 'projects', 'githubUrl', e.target.value)}
@@ -897,7 +856,7 @@ const injectScripts = () => {
   // Add custom Tailwind config to use 'Inter' font
 
 }
-// Call injectScripts when the component mounts
+;// Call injectScripts when the component mounts
 injectScripts();
 
 export default App;
